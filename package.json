@@ -1,48 +1,67 @@
 {
-  "name": "deepseek-desktop",
-  "version": "1.0.0",
+  "name": "deepseek-web-desktop",
+  "version": "1.2.0",
+  "description": "Personal Electron desktop wrapper for the official DeepSeek website",
   "main": "main.js",
+  "author": "doxdk (dk) and contributors; Windows fork maintained by EZdrang",
+  "license": "MIT",
   "scripts": {
     "start": "electron .",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "electron-builder"
+    "test": "node --test tests/*.test.cjs",
+    "build": "node scripts/build.cjs",
+    "build:dir": "node scripts/build.cjs --dir",
+    "setup": "node node_modules/electron/install.js"
   },
-  "keywords": [],
-  "author": "doxdk",
-  "license": "ISC",
-  "description": "A desktop version of DeepSeek, an AI-powered application that provides intelligent assistance and interaction. This application allows users to access DeepSeek's chat interface directly from their desktop, with support for local storage and cookies.",
   "devDependencies": {
-    "electron": "^34.0.1",
-    "electron-builder": "^24.6.3"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/doxdk/deepseek-desktop"
+    "electron": "44.7.2",
+    "electron-builder": "26.15.3"
   },
   "build": {
-    "appId": "com.doxdk.deepseek",
-    "productName": "DeepSeek",
-    "copyright": "Copyright © 2025 doxdk",
+    "appId": "local.deepseek.webdesktop",
+    "productName": "DeepSeek Web Desktop",
+    "copyright": "Based on MIT licensed code Copyright (c) 2025 dk",
+    "asar": true,
     "directories": {
       "output": "dist"
     },
     "files": [
       "main.js",
-      "index.html",
-      "preload.js",
-      "deepseek-logo.png"
+      "navigation.cjs",
+      "deepseek-logo.png",
+      "LICENSE",
+      "NOTICE.md"
     ],
     "win": {
-      "target": "nsis",
-      "icon": "deepseek-logo.png"
+      "target": [
+        "nsis"
+      ],
+      "icon": "deepseek-logo.png",
+      "executableName": "DeepSeek-Web-Desktop"
     },
-    "mac": {
-      "target": "dmg",
-      "icon": "deepseek-logo.png"
+    "nsis": {
+      "artifactName": "DeepSeek-Desktop-Setup-${version}-${arch}.${ext}",
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": "always",
+      "createStartMenuShortcut": true,
+      "shortcutName": "DeepSeek 网页桌面版",
+      "deleteAppDataOnUninstall": false,
+      "runAfterFinish": false,
+      "language": "2052",
+      "include": "build/installer.nsh"
     },
-    "linux": {
-      "target": "AppImage",
-      "icon": "deepseek-logo.png"
-    }
+    "electronDist": "node_modules/electron/dist"
+  },
+  "overrides": {
+    "global-agent": "4.1.3"
+  },
+  "repository": {
+    "url": "git+https://github.com/EZdrang/deepseek-desktop.git",
+    "type": "git"
+  },
+  "homepage": "https://github.com/EZdrang/deepseek-desktop#readme",
+  "bugs": {
+    "url": "https://github.com/EZdrang/deepseek-desktop/issues"
   }
 }

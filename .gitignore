@@ -128,3 +128,17 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Local app profiles, test evidence and credentials
+*test-profile*/
+smoke-profile/
+verification/
+test-results/
+user-data/
+.env.*
+*.pem
+*.pfx
+*.p12
+*.key
+*.exe
+*.exe.blockmap
